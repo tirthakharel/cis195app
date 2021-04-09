@@ -7,15 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D8B3ACC26211C230070B250 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D8B3ACB26211C230070B250 /* GoogleService-Info.plist */; };
 		2DEC8C7A2614DC6800E2A935 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEC8C792614DC6800E2A935 /* AppDelegate.swift */; };
 		2DEC8C7C2614DC6800E2A935 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEC8C7B2614DC6800E2A935 /* SceneDelegate.swift */; };
 		2DEC8C7E2614DC6800E2A935 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEC8C7D2614DC6800E2A935 /* ViewController.swift */; };
 		2DEC8C812614DC6800E2A935 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DEC8C7F2614DC6800E2A935 /* Main.storyboard */; };
 		2DEC8C832614DC6B00E2A935 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2DEC8C822614DC6B00E2A935 /* Assets.xcassets */; };
 		2DEC8C862614DC6B00E2A935 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DEC8C842614DC6B00E2A935 /* LaunchScreen.storyboard */; };
+		519D9428F45582CE68A9A506 /* Pods_cis195app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AD6474427F9FA4DE1453037 /* Pods_cis195app.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D8B3ACB26211C230070B250 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2DEC8C762614DC6800E2A935 /* cis195app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cis195app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DEC8C792614DC6800E2A935 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2DEC8C7B2614DC6800E2A935 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +27,9 @@
 		2DEC8C822614DC6B00E2A935 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2DEC8C852614DC6B00E2A935 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2DEC8C872614DC6B00E2A935 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F6DDE63CA392A5F005BD1B4 /* Pods-cis195app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cis195app.release.xcconfig"; path = "Target Support Files/Pods-cis195app/Pods-cis195app.release.xcconfig"; sourceTree = "<group>"; };
+		34D0076D83AE147792C299DB /* Pods-cis195app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cis195app.debug.xcconfig"; path = "Target Support Files/Pods-cis195app/Pods-cis195app.debug.xcconfig"; sourceTree = "<group>"; };
+		6AD6474427F9FA4DE1453037 /* Pods_cis195app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cis195app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +37,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				519D9428F45582CE68A9A506 /* Pods_cis195app.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0185483B378DE64BF0FFD265 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6AD6474427F9FA4DE1453037 /* Pods_cis195app.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1978042A1B1A872845B18957 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				34D0076D83AE147792C299DB /* Pods-cis195app.debug.xcconfig */,
+				2F6DDE63CA392A5F005BD1B4 /* Pods-cis195app.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		2DEC8C6D2614DC6800E2A935 = {
 			isa = PBXGroup;
 			children = (
 				2DEC8C782614DC6800E2A935 /* cis195app */,
 				2DEC8C772614DC6800E2A935 /* Products */,
+				1978042A1B1A872845B18957 /* Pods */,
+				0185483B378DE64BF0FFD265 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +90,7 @@
 				2DEC8C822614DC6B00E2A935 /* Assets.xcassets */,
 				2DEC8C842614DC6B00E2A935 /* LaunchScreen.storyboard */,
 				2DEC8C872614DC6B00E2A935 /* Info.plist */,
+				2D8B3ACB26211C230070B250 /* GoogleService-Info.plist */,
 			);
 			path = cis195app;
 			sourceTree = "<group>";
@@ -74,9 +102,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2DEC8C8A2614DC6B00E2A935 /* Build configuration list for PBXNativeTarget "cis195app" */;
 			buildPhases = (
+				1F60B7E1F463FC8CD4DC4A31 /* [CP] Check Pods Manifest.lock */,
 				2DEC8C722614DC6800E2A935 /* Sources */,
 				2DEC8C732614DC6800E2A935 /* Frameworks */,
 				2DEC8C742614DC6800E2A935 /* Resources */,
+				35EDAD626B1B84C897F94E2F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,12 +155,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DEC8C862614DC6B00E2A935 /* LaunchScreen.storyboard in Resources */,
+				2D8B3ACC26211C230070B250 /* GoogleService-Info.plist in Resources */,
 				2DEC8C832614DC6B00E2A935 /* Assets.xcassets in Resources */,
 				2DEC8C812614DC6800E2A935 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1F60B7E1F463FC8CD4DC4A31 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-cis195app-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		35EDAD626B1B84C897F94E2F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cis195app/Pods-cis195app-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cis195app/Pods-cis195app-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cis195app/Pods-cis195app-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2DEC8C722614DC6800E2A935 /* Sources */ = {
@@ -283,6 +356,7 @@
 		};
 		2DEC8C8B2614DC6B00E2A935 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 34D0076D83AE147792C299DB /* Pods-cis195app.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -301,6 +375,7 @@
 		};
 		2DEC8C8C2614DC6B00E2A935 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F6DDE63CA392A5F005BD1B4 /* Pods-cis195app.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
