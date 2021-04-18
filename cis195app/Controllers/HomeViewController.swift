@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class HomeViewController: UIViewController {
 
@@ -17,13 +18,19 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        let isAuthenticated = UserDefaults.standard.bool(forKey: "logged_in")
-        if !isAuthenticated {
+        isAuthenticated()
+    }
+    
+    // MARK: - Functions
+    
+    private func isAuthenticated() {
+        if FirebaseAuth.Auth.auth().currentUser == nil {
             let vc = LoginViewController()
             let navView = UINavigationController(rootViewController: vc)
             navView.modalPresentationStyle = .fullScreen
             present(navView, animated: false)
+        } else {
+            //print("USER: \(FirebaseAuth.Auth.auth().currentUser)")
         }
     }
 

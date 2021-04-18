@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RegistrationViewController: UIViewController {
     
@@ -127,13 +128,37 @@ class RegistrationViewController: UIViewController {
             return
         }
         
-        // TODO: log into firebase
+        DBController.sharedDB.doesUserExist(with: email) { [weak self] (exists) in
+            
+            guard let strongSelf = self else {
+                return
+            }
+            
+            guard !exists else {
+                strongSelf.alertRegistrationError("User with that email already exists!")
+                return
+            }
+            
+            // Firebase Registration
+            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: pw) { (authResult, err) in
+                
+                guard authResult != nil, err == nil else {
+                    print("ERROR CREATING THE USER")
+                    return
+                }
+                
+                DBController.sharedDB.insertUser(with: User(firstName: first, lastName: last, emailAddr: email))
+                
+                strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+            }
+        }
+        
     }
     
     // MARK: - Functions
     
-    func alertRegistrationError() {
-        let alert = UIAlertController(title: "Error", message: "Please fill out all fields!", preferredStyle: .alert)
+    func alertRegistrationError(_ message: String = "Please fill out all fields!") {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
         present(alert, animated: true)
     }

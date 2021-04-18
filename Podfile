@@ -6,7 +6,7 @@ target 'cis195app' do
   use_frameworks!
 
   # Pods for cis195app
-  pod 'Firebase/Database'
   pod 'Firebase/Auth'
+  pod 'Firebase/Database'
 
 end
