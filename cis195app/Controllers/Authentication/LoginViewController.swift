@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
         emailField.autocorrectionType = .no
         emailField.returnKeyType = .continue
         // TODO: put some constraints and UI stuff
-        emailField.placeholder = "example@email.com"
+        emailField.placeholder = "Email Address"
         return emailField
     }()
     

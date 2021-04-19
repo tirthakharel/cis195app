@@ -19,6 +19,8 @@
 		2DEC8C812614DC6800E2A935 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DEC8C7F2614DC6800E2A935 /* Main.storyboard */; };
 		2DEC8C832614DC6B00E2A935 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2DEC8C822614DC6B00E2A935 /* Assets.xcassets */; };
 		2DEC8C862614DC6B00E2A935 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DEC8C842614DC6B00E2A935 /* LaunchScreen.storyboard */; };
+		2DF15F3F262D1B6400EEE43B /* ToDoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF15F3E262D1B6400EEE43B /* ToDoCollectionViewCell.swift */; };
+		2DF15F43262D1BD900EEE43B /* ClassesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF15F42262D1BD900EEE43B /* ClassesCollectionViewCell.swift */; };
 		519D9428F45582CE68A9A506 /* Pods_cis195app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AD6474427F9FA4DE1453037 /* Pods_cis195app.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,8 @@
 		2DEC8C822614DC6B00E2A935 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2DEC8C852614DC6B00E2A935 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2DEC8C872614DC6B00E2A935 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2DF15F3E262D1B6400EEE43B /* ToDoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCollectionViewCell.swift; sourceTree = "<group>"; };
+		2DF15F42262D1BD900EEE43B /* ClassesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesCollectionViewCell.swift; sourceTree = "<group>"; };
 		2F6DDE63CA392A5F005BD1B4 /* Pods-cis195app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cis195app.release.xcconfig"; path = "Target Support Files/Pods-cis195app/Pods-cis195app.release.xcconfig"; sourceTree = "<group>"; };
 		34D0076D83AE147792C299DB /* Pods-cis195app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cis195app.debug.xcconfig"; path = "Target Support Files/Pods-cis195app/Pods-cis195app.debug.xcconfig"; sourceTree = "<group>"; };
 		6AD6474427F9FA4DE1453037 /* Pods_cis195app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cis195app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,8 +78,9 @@
 		2D80FD13262B982300CE0BBE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2DF15F3C262D16F900EEE43B /* To-Do Page */,
+				2DF15F3B262D16DB00EEE43B /* Home Page */,
 				2D80FD25262B9AB600CE0BBE /* Authentication */,
-				2DEC8C7D2614DC6800E2A935 /* HomeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -155,6 +160,23 @@
 				2D8B3ACB26211C230070B250 /* GoogleService-Info.plist */,
 			);
 			path = cis195app;
+			sourceTree = "<group>";
+		};
+		2DF15F3B262D16DB00EEE43B /* Home Page */ = {
+			isa = PBXGroup;
+			children = (
+				2DF15F3E262D1B6400EEE43B /* ToDoCollectionViewCell.swift */,
+				2DF15F42262D1BD900EEE43B /* ClassesCollectionViewCell.swift */,
+				2DEC8C7D2614DC6800E2A935 /* HomeViewController.swift */,
+			);
+			path = "Home Page";
+			sourceTree = "<group>";
+		};
+		2DF15F3C262D16F900EEE43B /* To-Do Page */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "To-Do Page";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,7 +301,9 @@
 				2D80FD7F262BCD4B00CE0BBE /* User.swift in Sources */,
 				2D80FD1C262B994800CE0BBE /* RegistrationViewController.swift in Sources */,
 				2DEC8C7C2614DC6800E2A935 /* SceneDelegate.swift in Sources */,
+				2DF15F43262D1BD900EEE43B /* ClassesCollectionViewCell.swift in Sources */,
 				2D80FD7C262BCC3000CE0BBE /* DBController.swift in Sources */,
+				2DF15F3F262D1B6400EEE43B /* ToDoCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +452,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NQBRD2FP6S;
 				INFOPLIST_FILE = cis195app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -447,6 +472,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NQBRD2FP6S;
 				INFOPLIST_FILE = cis195app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
