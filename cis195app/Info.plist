@@ -62,5 +62,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app uses your location to figure out weather data. Your location information is never stored in our database!</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app uses your location to figure out weather data. Your location information is never stored in our database!</string>
+	<key>NSLocationUsageDescription</key>
+	<string>This app uses your location to figure out weather data. Your location information is never stored in our database!</string>
 </dict>
 </plist>
