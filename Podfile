@@ -6,6 +6,8 @@ target 'cis195app' do
   use_frameworks!
 
   # Pods for cis195app
+  pod 'SwiftyJSON', '~> 4.0'
+  pod 'Alamofire', '~> 5.2'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
 
