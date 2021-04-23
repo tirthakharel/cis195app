@@ -66,11 +66,13 @@ extension DBController {
                 return
             }
             
-            if let dataMap = data.value {
-                // TODO
-                print(dataMap)
+            if let dataMap = data.value as! NSDictionary? {
+                let dict: NSDictionary = dataMap
+                if let classes = dict["classes"] as! NSArray? {
+                    completion(classes.count)
+                }
             } else {
-                completion(0)
+                completion(-1)
             }
         }
     }
@@ -78,16 +80,18 @@ extension DBController {
     /// Gets number of to-dos registered
     public func getToDoCount(with user: User, completion: @escaping ((Int) -> Void)) {
         db.child(user.escapedEmail).getData { (err, data) in
-            guard err != nil else {
+            guard err == nil else {
                 completion(-1)
                 return
             }
             
-            if let dataMap = data.value {
-                // TODO
-                print(dataMap)
+            if let dataMap = data.value as! NSDictionary? {
+                let dict: NSDictionary = dataMap
+                if let classes = dict["todos"] as! NSArray? {
+                    completion(classes.count)
+                }
             } else {
-                completion(0)
+                completion(-1)
             }
         }
     }

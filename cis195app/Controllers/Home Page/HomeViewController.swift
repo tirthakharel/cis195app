@@ -8,24 +8,16 @@
 import UIKit
 import FirebaseAuth
 import CoreLocation
+import SwiftyJSON
+import Alamofire
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
     private var collectionView: UICollectionView?
-    static var currUser: User? // the current user in the application (need static so we can access from other parts)
-    let locationManager = CLLocationManager()
+    private var locationManager : CLLocationManager?
+    private var currLocation : CLLocation?
+    let currUser = FirebaseAuth.Auth.auth().currentUser
     
-    let toDoConfig = UICollectionView.CellRegistration<ToDoCollectionViewCell, String> { (cell, indexPath, model) in
-        // TODO: all user =
-//        DBController.sharedDB.getClassesCount(with: FirebaseAuth.Auth.auth().currentUser) { (<#Int#>) in
-//            <#code#>
-//        }
-        cell.label.text = model
-    }
-//    let classesConfig = UICollectionView.CellRegistration<ClassesCollectionViewCell, String> { (cell, indexPath, model) in
-//        cell.label.text = model
-//    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
@@ -47,16 +39,12 @@ class HomeViewController: UIViewController {
         
         view.addSubview(collectionView)
         collectionView.frame = view.bounds
-    
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         isAuthenticated()
+        getUserLocation()
     }
     
     // MARK: - Functions
@@ -74,26 +62,22 @@ class HomeViewController: UIViewController {
     }
     
     private func isAuthenticated() {
-        if FirebaseAuth.Auth.auth().currentUser == nil {
+        if self.currUser == nil {
+            print("hello")
             let vc = LoginViewController()
             let navView = UINavigationController(rootViewController: vc)
             navView.modalPresentationStyle = .fullScreen
-            present(navView, animated: false)
-        } else {
-            let user = FirebaseAuth.Auth.auth().currentUser!
-            if let email = user.email {
-                DBController.sharedDB.getUser(with: email) { (usr) in
-                    HomeViewController.currUser = usr
-                }
-            } else {
-                let vc = LoginViewController()
-                let navView = UINavigationController(rootViewController: vc)
-                navView.modalPresentationStyle = .fullScreen
-                present(navView, animated: false)
-            }
+            self.present(navView, animated: false)
         }
     }
-
+    
+    private func getUserLocation() {
+        locationManager = CLLocationManager()
+        locationManager?.requestAlwaysAuthorization()
+        locationManager?.startUpdatingLocation()
+        locationManager?.delegate = self
+    }
+    
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -113,13 +97,39 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 1 {
             
-            let model = "To Do Cell"
-            
-            let toDoCell = collectionView.dequeueConfiguredReusableCell(using: toDoConfig, for: indexPath, item: model)
+            let toDoCell = collectionView.dequeueReusableCell(withReuseIdentifier: ToDoCollectionViewCell.identifier, for: indexPath) as! ToDoCollectionViewCell
+            if let userEmail = self.currUser?.email {
+                DBController.sharedDB.getUser(with: userEmail) { (user) in
+                    if let usr = user {
+                        DBController.sharedDB.getToDoCount(with: usr) { (num) in
+                            if num >= 0 {
+                                DispatchQueue.main.async {
+                                    toDoCell.numToDos.text = "\(num)"
+                                    //self.collectionView?.reloadData()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             return toDoCell
         }
         
-        let classesCell = collectionView.dequeueReusableCell(withReuseIdentifier: ToDoCollectionViewCell.identifier, for: indexPath)
+        let classesCell = collectionView.dequeueReusableCell(withReuseIdentifier: ClassesCollectionViewCell.identifier, for: indexPath) as! ClassesCollectionViewCell
+        if let userEmail = self.currUser?.email {
+            DBController.sharedDB.getUser(with: userEmail) { (user) in
+                if let usr = user {
+                    DBController.sharedDB.getClassesCount(with: usr) { (num) in
+                        if num >= 0 {
+                            DispatchQueue.main.async {
+                                classesCell.numClasses.text = "\(num)"
+                                //self.collectionView?.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+        }
         return classesCell
     }
     
@@ -137,6 +147,39 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: TodayInfoHeaderCollectionReusableView.identifier, for: indexPath) as! TodayInfoHeaderCollectionReusableView
         
+        if let userEmail = self.currUser?.email {
+            DBController.sharedDB.getUser(with: userEmail) { (user) in
+                if let usr = user {
+                    DispatchQueue.main.async {
+                        header.nameLabel.text = "Welcome, \(usr.firstName)!"
+                        //self.collectionView?.reloadData()
+                    }
+                }
+            }
+        }
+        
+        if let loc = currLocation {
+            let lat = String(format: "%.3f", loc.coordinate.latitude)
+            let lng = String(format: "%.3f", loc.coordinate.longitude)
+            AF.request("https://api.weatherbit.io/v2.0/current?lat=\(lat)&lon=\(lng)&key=\(api_key)&units=I").responseJSON { (res) in
+                if let val = res.value {
+                    let json = JSON(val)
+                    if let temp = json["data"][0]["temp"].float, let city = json["data"][0]["city_name"].string {
+                        let tempInt = Int(temp)
+                        DispatchQueue.global().async(execute: {
+                            DispatchQueue.main.async {
+                                header.weatherLabel.text = String(tempInt) + "°"
+                                header.cityLabel.text = city
+                                //collectionView.reloadItems(at: [IndexPath(row: 0, section: 0)])
+                        }})
+                        
+                        
+                    }
+                }
+            }
+            
+        }
+        
         return header
     }
     
@@ -151,10 +194,31 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
     }
-
-}
-
-extension HomeViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            let lat = location.coordinate.latitude.rounded()
+            let lng = location.coordinate.longitude.rounded()
+            
+            if let currLocation = self.currLocation {
+                let curr_lat = currLocation.coordinate.latitude.rounded()
+                let curr_lng = currLocation.coordinate.latitude.rounded()
+                
+                if (curr_lat != lat || curr_lng != lng) {
+                    self.currLocation = location
+                    DispatchQueue.main.async {
+                        self.collectionView?.reloadData()
+                    }
+                }
+            } else {
+                self.currLocation = location
+                DispatchQueue.main.async {
+                    self.collectionView?.reloadData()
+                }
+            }
+            
+        }
+    }
     
 }
 
