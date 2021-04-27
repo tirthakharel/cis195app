@@ -13,6 +13,8 @@
 		2D80FD7C262BCC3000CE0BBE /* DBController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D80FD7B262BCC3000CE0BBE /* DBController.swift */; };
 		2D80FD7F262BCD4B00CE0BBE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D80FD7E262BCD4B00CE0BBE /* User.swift */; };
 		2D8B3ACC26211C230070B250 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D8B3ACB26211C230070B250 /* GoogleService-Info.plist */; };
+		2D9BE9242637B12100D88DD0 /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BE9232637B12100D88DD0 /* ToDoViewController.swift */; };
+		2D9BE92826387EEB00D88DD0 /* ClassesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BE92726387EEB00D88DD0 /* ClassesViewController.swift */; };
 		2DD0786E2630A3DB003376E6 /* TodayInfoHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD0786D2630A3DB003376E6 /* TodayInfoHeaderCollectionReusableView.swift */; };
 		2DD078712630B824003376E6 /* SpacerCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD078702630B824003376E6 /* SpacerCollectionReusableView.swift */; };
 		2DD078742630C2A5003376E6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD078732630C2A5003376E6 /* Location.swift */; };
@@ -36,6 +38,8 @@
 		2D80FD7B262BCC3000CE0BBE /* DBController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBController.swift; sourceTree = "<group>"; };
 		2D80FD7E262BCD4B00CE0BBE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2D8B3ACB26211C230070B250 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2D9BE9232637B12100D88DD0 /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
+		2D9BE92726387EEB00D88DD0 /* ClassesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesViewController.swift; sourceTree = "<group>"; };
 		2DD0786D2630A3DB003376E6 /* TodayInfoHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayInfoHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		2DD078702630B824003376E6 /* SpacerCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerCollectionReusableView.swift; sourceTree = "<group>"; };
 		2DD078732630C2A5003376E6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -88,6 +92,7 @@
 		2D80FD13262B982300CE0BBE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2D9BE92626387ED800D88DD0 /* Classes Page */,
 				2DF15F3C262D16F900EEE43B /* To-Do Page */,
 				2DF15F3B262D16DB00EEE43B /* Home Page */,
 				2D80FD25262B9AB600CE0BBE /* Authentication */,
@@ -144,6 +149,14 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		2D9BE92626387ED800D88DD0 /* Classes Page */ = {
+			isa = PBXGroup;
+			children = (
+				2D9BE92726387EEB00D88DD0 /* ClassesViewController.swift */,
+			);
+			path = "Classes Page";
+			sourceTree = "<group>";
+		};
 		2DEC8C6D2614DC6800E2A935 = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +203,7 @@
 		2DF15F3C262D16F900EEE43B /* To-Do Page */ = {
 			isa = PBXGroup;
 			children = (
+				2D9BE9232637B12100D88DD0 /* ToDoViewController.swift */,
 			);
 			path = "To-Do Page";
 			sourceTree = "<group>";
@@ -312,11 +326,13 @@
 				2D80FD23262B9AB000CE0BBE /* LoginViewController.swift in Sources */,
 				2DD0791826338C00003376E6 /* Secrets.swift in Sources */,
 				2D80FD2D262BA26A00CE0BBE /* Extensions.swift in Sources */,
+				2D9BE92826387EEB00D88DD0 /* ClassesViewController.swift in Sources */,
 				2DEC8C7E2614DC6800E2A935 /* HomeViewController.swift in Sources */,
 				2DEC8C7A2614DC6800E2A935 /* AppDelegate.swift in Sources */,
 				2D80FD7F262BCD4B00CE0BBE /* User.swift in Sources */,
 				2DD078712630B824003376E6 /* SpacerCollectionReusableView.swift in Sources */,
 				2DD078772630C4F4003376E6 /* LocationController.swift in Sources */,
+				2D9BE9242637B12100D88DD0 /* ToDoViewController.swift in Sources */,
 				2DD078742630C2A5003376E6 /* Location.swift in Sources */,
 				2D80FD1C262B994800CE0BBE /* RegistrationViewController.swift in Sources */,
 				2DEC8C7C2614DC6800E2A935 /* SceneDelegate.swift in Sources */,

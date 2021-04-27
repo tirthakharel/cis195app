@@ -149,6 +149,9 @@ class RegistrationViewController: UIViewController {
                 
                 DBController.sharedDB.insertUser(with: User(firstName: first, lastName: last, emailAddr: email))
                 
+                if let presenter = strongSelf.presentingViewController as? HomeViewController {
+                    presenter.collectionView?.reloadData()
+                }
                 strongSelf.navigationController?.dismiss(animated: true, completion: nil)
             }
         }
