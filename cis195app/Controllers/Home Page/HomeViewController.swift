@@ -13,7 +13,7 @@ import Alamofire
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
-    private var collectionView: UICollectionView?
+    var collectionView: UICollectionView?
     private var locationManager : CLLocationManager?
     private var currLocation : CLLocation?
     let currUser = FirebaseAuth.Auth.auth().currentUser
@@ -62,20 +62,26 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     private func isAuthenticated() {
-        if self.currUser == nil {
-            print("hello")
+        if FirebaseAuth.Auth.auth().currentUser == nil {
             let vc = LoginViewController()
             let navView = UINavigationController(rootViewController: vc)
             navView.modalPresentationStyle = .fullScreen
-            self.present(navView, animated: false)
+            DispatchQueue.main.async {
+                self.present(navView, animated: true)
+            }
         }
     }
     
     private func getUserLocation() {
         locationManager = CLLocationManager()
         locationManager?.requestAlwaysAuthorization()
-        locationManager?.startUpdatingLocation()
+        locationManager?.requestWhenInUseAuthorization()
+        
         locationManager?.delegate = self
+        locationManager?.desiredAccuracy = kCLLocationAccuracyKilometer
+        
+        locationManager?.startUpdatingLocation()
+        collectionView?.reloadData()
     }
     
 }
@@ -166,6 +172,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     let json = JSON(val)
                     if let temp = json["data"][0]["temp"].float, let city = json["data"][0]["city_name"].string {
                         let tempInt = Int(temp)
+                        print(tempInt)
                         DispatchQueue.global().async(execute: {
                             DispatchQueue.main.async {
                                 header.weatherLabel.text = String(tempInt) + "°"
@@ -195,6 +202,26 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if (indexPath.item == 0) {
+            // present classes
+            let vc = ClassesViewController()
+            let navView = UINavigationController(rootViewController: vc)
+            navView.modalPresentationStyle = .fullScreen
+            DispatchQueue.main.async {
+                self.present(navView, animated: true)
+            }
+        } else {
+            // present to-do
+            let vc = ToDoViewController()
+            let navView = UINavigationController(rootViewController: vc)
+            navView.modalPresentationStyle = .fullScreen
+            DispatchQueue.main.async {
+                self.present(navView, animated: true)
+            }
+        }
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             let lat = location.coordinate.latitude.rounded()
@@ -202,9 +229,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             if let currLocation = self.currLocation {
                 let curr_lat = currLocation.coordinate.latitude.rounded()
-                let curr_lng = currLocation.coordinate.latitude.rounded()
+                let curr_lng = currLocation.coordinate.longitude.rounded()
                 
-                if (curr_lat != lat || curr_lng != lng) {
+                if (!Double.equal(curr_lat, lat, precise: 0) || !Double.equal(curr_lng, lng, precise: 0)) {
                     self.currLocation = location
                     DispatchQueue.main.async {
                         self.collectionView?.reloadData()
@@ -216,7 +243,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     self.collectionView?.reloadData()
                 }
             }
-            
         }
     }
     

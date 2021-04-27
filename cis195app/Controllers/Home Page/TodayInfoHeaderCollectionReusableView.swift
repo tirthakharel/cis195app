@@ -38,16 +38,6 @@ class TodayInfoHeaderCollectionReusableView: UICollectionReusableView, CLLocatio
         super.init(frame: frame)
         backgroundColor = .clear
         
-        locManager.requestAlwaysAuthorization()
-        locManager.requestWhenInUseAuthorization()
-        
-        locManager.delegate = self
-        locManager.desiredAccuracy = kCLLocationAccuracyKilometer
-        
-        if CLLocationManager.locationServicesEnabled() {
-            locManager.startUpdatingLocation()
-        }
-        
         self.addSubview(nameLabel)
         self.addSubview(cityLabel)
         self.addSubview(weatherLabel)
