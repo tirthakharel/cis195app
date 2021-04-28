@@ -5,7 +5,7 @@
 
 import UIKit
 
-class ToDoViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ToDoViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var collectionView: UICollectionView?
 
@@ -18,15 +18,17 @@ class ToDoViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
         title = "To-Dos"
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(dismissSelf))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(dismissSelf))
+        let plusImg = UIImage(systemName: "plus.square")?.withTintColor(.systemBlue)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: plusImg, style: .plain, target: self, action: #selector(addToDo))
         
-        collectionView.backgroundColor = .yellow
+        collectionView.backgroundColor = .white
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        
         // cell
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(ToDoReusableCollectionViewCell.self, forCellWithReuseIdentifier: ToDoReusableCollectionViewCell.identifier)
         
         view.addSubview(collectionView)
         collectionView.frame = view.bounds
@@ -36,17 +38,19 @@ class ToDoViewController: UIViewController, UICollectionViewDataSource, UICollec
     private func createLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 1
-        layout.minimumInteritemSpacing = 0
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
-        let size = (self.view.width - 80)/2
-        layout.itemSize = CGSize(width: size, height: size)
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right:10)
         
         return layout
     }
     
     @objc private func dismissSelf() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func addToDo() {
+        print("alksdl")
     }
 
 }
@@ -57,11 +61,11 @@ extension ToDoViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .red
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ToDoReusableCollectionViewCell.identifier, for: indexPath)
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.width - 45, height: collectionView.height / 8)
+    }
 }
