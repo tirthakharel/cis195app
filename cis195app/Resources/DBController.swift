@@ -70,6 +70,8 @@ extension DBController {
                 let dict: NSDictionary = dataMap
                 if let classes = dict["classes"] as! NSArray? {
                     completion(classes.count)
+                } else {
+                    completion(0)
                 }
             } else {
                 completion(-1)
@@ -89,6 +91,8 @@ extension DBController {
                 let dict: NSDictionary = dataMap
                 if let classes = dict["todos"] as! NSArray? {
                     completion(classes.count)
+                } else {
+                    completion(0)
                 }
             } else {
                 completion(-1)

@@ -111,7 +111,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                             if num >= 0 {
                                 DispatchQueue.main.async {
                                     toDoCell.numToDos.text = "\(num)"
-                                    //self.collectionView?.reloadData()
                                 }
                             }
                         }
@@ -129,7 +128,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         if num >= 0 {
                             DispatchQueue.main.async {
                                 classesCell.numClasses.text = "\(num)"
-                                //self.collectionView?.reloadData()
                             }
                         }
                     }
@@ -158,7 +156,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 if let usr = user {
                     DispatchQueue.main.async {
                         header.nameLabel.text = "Welcome, \(usr.firstName)!"
-                        //self.collectionView?.reloadData()
                     }
                 }
             }
@@ -172,15 +169,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     let json = JSON(val)
                     if let temp = json["data"][0]["temp"].float, let city = json["data"][0]["city_name"].string {
                         let tempInt = Int(temp)
-                        print(tempInt)
                         DispatchQueue.global().async(execute: {
                             DispatchQueue.main.async {
                                 header.weatherLabel.text = String(tempInt) + "°"
                                 header.cityLabel.text = city
-                                //collectionView.reloadItems(at: [IndexPath(row: 0, section: 0)])
                         }})
-                        
-                        
                     }
                 }
             }
@@ -216,6 +209,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let vc = ToDoViewController()
             let navView = UINavigationController(rootViewController: vc)
             navView.modalPresentationStyle = .fullScreen
+            navView.navigationBar.prefersLargeTitles = true
             DispatchQueue.main.async {
                 self.present(navView, animated: true)
             }
