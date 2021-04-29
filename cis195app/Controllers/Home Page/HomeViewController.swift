@@ -16,7 +16,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     var collectionView: UICollectionView?
     private var locationManager : CLLocationManager?
     private var currLocation : CLLocation?
-    let currUser = FirebaseAuth.Auth.auth().currentUser
+    let currUser: FirebaseAuth.User? = FirebaseAuth.Auth.auth().currentUser
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -207,6 +207,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else {
             // present to-do
             let vc = ToDoViewController()
+            vc.currUser = currUser
             let navView = UINavigationController(rootViewController: vc)
             navView.modalPresentationStyle = .fullScreen
             navView.navigationBar.prefersLargeTitles = true

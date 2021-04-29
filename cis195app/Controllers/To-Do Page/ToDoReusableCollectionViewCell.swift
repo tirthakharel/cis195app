@@ -5,14 +5,19 @@
 
 import UIKit
 
-class ToDoReusableCollectionViewCell: UICollectionViewCell {
+class ToDoReusableCollectionViewCell: UICollectionViewListCell {
     static let identifier = "ToDoItem"
     
-    let taskLabel : UILabel = {
+    public let taskLabel : UILabel = {
         let label = UILabel()
-        label.text = "Some task to do"
-        label.font = .systemFont(ofSize: 20, weight: .regular)
+        label.font = .systemFont(ofSize: 22, weight: .bold)
         label.textColor = .black
+        return label
+    }()
+    
+    public let priorityLabel : UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .light)
         return label
     }()
     
@@ -28,12 +33,14 @@ class ToDoReusableCollectionViewCell: UICollectionViewCell {
         layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: contentView.layer.cornerRadius).cgPath
         
         self.contentView.addSubview(taskLabel)
+        self.contentView.addSubview(priorityLabel)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        taskLabel.frame = CGRect(x: 5, y: 5, width: self.contentView.width * (3/5), height: 20)
+        taskLabel.frame = CGRect(x: 10, y: self.contentView.frame.midY / 2, width: self.contentView.width * (3/5), height: 20)
+        priorityLabel.frame = CGRect(x: 10, y: taskLabel.bottom + 5, width: taskLabel.width, height: 15)
     }
     
     required init?(coder: NSCoder) {
