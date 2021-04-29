@@ -4,10 +4,13 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ToDoViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var collectionView: UICollectionView?
+    var currUser: FirebaseAuth.User?
+    var toDoItems: [ToDo] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +28,7 @@ class ToDoViewController: UIViewController, UICollectionViewDataSource, UICollec
         collectionView.backgroundColor = .white
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.showsVerticalScrollIndicator = false
         
         // cell
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
@@ -33,6 +37,21 @@ class ToDoViewController: UIViewController, UICollectionViewDataSource, UICollec
         view.addSubview(collectionView)
         collectionView.frame = view.bounds
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let userEmail = self.currUser?.email {
+            DBController.sharedDB.getUser(with: userEmail) { (user) in
+                if let usr = user {
+                    DBController.sharedDB.getToDos(with: usr) { (toDoList) in
+                        self.toDoItems = toDoList
+                        DispatchQueue.main.async {
+                            self.collectionView?.reloadData()
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     
     private func createLayout() -> UICollectionViewFlowLayout {
@@ -40,8 +59,6 @@ class ToDoViewController: UIViewController, UICollectionViewDataSource, UICollec
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right:10)
-        
         return layout
     }
     
@@ -50,22 +67,25 @@ class ToDoViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     @objc private func addToDo() {
-        print("alksdl")
+        print("ToDo: need to add functionality")
     }
 
 }
 
 extension ToDoViewController {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        3
+        return toDoItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ToDoReusableCollectionViewCell.identifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ToDoReusableCollectionViewCell.identifier, for: indexPath) as! ToDoReusableCollectionViewCell
+        cell.taskLabel.text = toDoItems[indexPath.item].taskName
+        cell.priorityLabel.text = toDoItems[indexPath.item].priorityString
+        cell.priorityLabel.textColor = toDoItems[indexPath.item].priorityColor
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.width - 45, height: collectionView.height / 8)
+        return CGSize(width: collectionView.width - 45, height: collectionView.height / 10)
     }
 }

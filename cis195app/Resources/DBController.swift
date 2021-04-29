@@ -89,13 +89,44 @@ extension DBController {
             
             if let dataMap = data.value as! NSDictionary? {
                 let dict: NSDictionary = dataMap
-                if let classes = dict["todos"] as! NSArray? {
-                    completion(classes.count)
+                if let todos = dict["todos"] as? NSArray {
+                    completion(todos.count)
                 } else {
                     completion(0)
                 }
             } else {
                 completion(-1)
+            }
+        }
+    }
+    
+    
+    /// Gets list of to-dos
+    public func getToDos(with user: User, completion: @escaping (([ToDo]) -> Void)) {
+        db.child(user.escapedEmail).getData { (err, data) in
+            guard err == nil else {
+                completion([])
+                return
+            }
+            
+            var toDoArr: [ToDo] = []
+            
+            if let dataMap = data.value as? NSDictionary {
+                if let todo = dataMap["todos"] as? NSArray {
+                    for item in todo {
+                        if let todoItem = item as? NSDictionary {
+                            // can forcibly cast here because we guarantee data will not be malformed
+                            let taskName = todoItem["task"] as! String
+                            let priority = todoItem["priority"] as! Int
+                            toDoArr.append(ToDo(taskName: taskName, priority: priority, dueDate: nil))
+                        }
+                    }
+                    completion(toDoArr)
+                } else {
+                    completion([])
+                }
+            } else {
+                completion([])
             }
         }
     }
