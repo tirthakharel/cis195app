@@ -43,7 +43,11 @@ class ToDoViewController: UIViewController, UICollectionViewDataSource, UICollec
             DBController.sharedDB.getUser(with: userEmail) { (user) in
                 if let usr = user {
                     DBController.sharedDB.getToDos(with: usr) { (toDoList) in
-                        self.toDoItems = toDoList
+                        var listToSort = toDoList
+                        listToSort.sort { a, b in
+                            return a.priority > b.priority
+                        }
+                        self.toDoItems = listToSort
                         DispatchQueue.main.async {
                             self.collectionView?.reloadData()
                         }
@@ -67,7 +71,9 @@ class ToDoViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     @objc private func addToDo() {
-        print("ToDo: need to add functionality")
+        let vc = NewToDoViewController()
+        vc.currUser = self.currUser
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }
@@ -87,5 +93,31 @@ extension ToDoViewController {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.width - 45, height: collectionView.height / 10)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = toDoItems[indexPath.item]
+        let alert = UIAlertController(title: "Confirm", message: "You sure you're done with this To-Do?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Nevermind", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yep!", style: .destructive, handler: { _ in
+            if let userEmail = self.currUser?.email {
+                DBController.sharedDB.getUser(with: userEmail) { (user) in
+                    if let usr = user {
+                        DBController.sharedDB.removeToDo(with: usr, with: item) { (toDoList) in
+                            var listToSort = toDoList
+                            listToSort.sort { a, b in
+                                return a.priority > b.priority
+                            }
+                            self.toDoItems = listToSort
+                            DispatchQueue.main.async {
+                                self.collectionView?.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+        }))
+        present(alert, animated: true)
+        
     }
 }

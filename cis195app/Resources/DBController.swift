@@ -18,6 +18,7 @@ final class DBController {
 extension DBController {
     
     public func doesUserExist(with email: String, completion: @escaping ((Bool) -> Void)) {
+        print("whatttt")
         
         var escapedEmail = email.replacingOccurrences(of: ".", with: "-")
         escapedEmail = escapedEmail.replacingOccurrences(of: "@", with: "-")
@@ -47,10 +48,11 @@ extension DBController {
                 return
             }
             
-            if let dataMap = data.value as! NSDictionary? {
-                let dict: NSDictionary = dataMap
-                if let firstName = dict["first_name"] as! String?, let lastName = dict["last_name"] as! String? {
+            if let dataMap = data.value as? NSDictionary {
+                if let firstName = dataMap["first_name"] as! String?, let lastName = dataMap["last_name"] as! String? {
                     completion(User(firstName: firstName, lastName: lastName, emailAddr: rawEmail))
+                } else {
+                    print("First name, last name doesn't exist?")
                 }
             } else {
                 completion(nil)
@@ -124,6 +126,67 @@ extension DBController {
                     completion(toDoArr)
                 } else {
                     completion([])
+                }
+            } else {
+                completion([])
+            }
+        }
+    }
+    
+    /// Adds new to-do
+    public func addToDo(with user: User, with toDoToAdd: ToDo, completion: @escaping ((Bool) -> Void)) {
+        db.child(user.escapedEmail).getData { (err, data) in
+            guard err == nil else {
+                completion(false)
+                return
+            }
+            
+            if let dataMap = data.value as? NSDictionary {
+                let newToDo : NSDictionary = [ "task" : toDoToAdd.taskName, "priority" : toDoToAdd.priority]
+                if let todos = dataMap["todos"] as? NSMutableArray {
+                    todos.add(newToDo)
+                    self.db.child("\(user.escapedEmail)/todos").setValue(todos)
+                    completion(true)
+                } else {
+                    let arr : NSArray = [newToDo]
+                    self.db.child("\(user.escapedEmail)/todos").setValue(arr)
+                    completion(true)
+                }
+            } else {
+                completion(false)
+            }
+        }
+    }
+    
+    /// Deletes to-do
+    public func removeToDo(with user: User, with toDoToDelete: ToDo, completion: @escaping (([ToDo]) -> Void)) {
+        db.child(user.escapedEmail).getData { (err, data) in
+            guard err == nil else {
+                completion([])
+                return
+            }
+            
+            var toDoArr: [ToDo] = []
+            var removed = false
+            let updatedToDos : NSMutableArray = []
+            
+            if let dataMap = data.value as? NSDictionary {
+                if let todos = dataMap["todos"] as? NSMutableArray {
+                    for item in todos {
+                        if let todoItem = item as? NSDictionary {
+                            // can forcibly cast here because we guarantee data will not be malformed
+                            let taskName = todoItem["task"] as! String
+                            let priority = todoItem["priority"] as! Int
+                            if taskName != toDoToDelete.taskName || priority != toDoToDelete.priority || removed {
+                                toDoArr.append(ToDo(taskName: taskName, priority: priority, dueDate: nil))
+                                updatedToDos.add(item)
+                            } else {
+                                removed.toggle()
+                            }
+                        }
+                    }
+                    self.db.child("\(user.escapedEmail)/todos").setValue(updatedToDos)
+                    completion(toDoArr)
                 }
             } else {
                 completion([])

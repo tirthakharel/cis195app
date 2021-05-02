@@ -13,7 +13,7 @@ class TodayInfoHeaderCollectionReusableView: UICollectionReusableView, CLLocatio
     let nameLabel : UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 30, weight: .regular)
-        label.text = "Welcome, Tirtha!"
+        label.text = "Welcome, ____!"
         label.textColor = .black
         return label
     }()
@@ -30,13 +30,14 @@ class TodayInfoHeaderCollectionReusableView: UICollectionReusableView, CLLocatio
         let label = UILabel()
         label.font = .systemFont(ofSize: 150, weight: .bold)
         label.textColor = .black
-        label.text = "65"
+        label.text = "-"
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .clear
+        print("jhgjh")
         
         self.addSubview(nameLabel)
         self.addSubview(cityLabel)

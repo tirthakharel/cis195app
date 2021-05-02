@@ -16,6 +16,7 @@
 		2D9BE9242637B12100D88DD0 /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BE9232637B12100D88DD0 /* ToDoViewController.swift */; };
 		2D9BE92826387EEB00D88DD0 /* ClassesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BE92726387EEB00D88DD0 /* ClassesViewController.swift */; };
 		2D9BE92C263905B600D88DD0 /* ToDoReusableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BE92B263905B600D88DD0 /* ToDoReusableCollectionViewCell.swift */; };
+		2DCF322C263F0E88002B8DDB /* NewToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCF322B263F0E88002B8DDB /* NewToDoViewController.swift */; };
 		2DD0786E2630A3DB003376E6 /* TodayInfoHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD0786D2630A3DB003376E6 /* TodayInfoHeaderCollectionReusableView.swift */; };
 		2DD078712630B824003376E6 /* SpacerCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD078702630B824003376E6 /* SpacerCollectionReusableView.swift */; };
 		2DD078742630C2A5003376E6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD078732630C2A5003376E6 /* Location.swift */; };
@@ -42,6 +43,7 @@
 		2D9BE9232637B12100D88DD0 /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
 		2D9BE92726387EEB00D88DD0 /* ClassesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesViewController.swift; sourceTree = "<group>"; };
 		2D9BE92B263905B600D88DD0 /* ToDoReusableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoReusableCollectionViewCell.swift; sourceTree = "<group>"; };
+		2DCF322B263F0E88002B8DDB /* NewToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewToDoViewController.swift; sourceTree = "<group>"; };
 		2DD0786D2630A3DB003376E6 /* TodayInfoHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayInfoHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		2DD078702630B824003376E6 /* SpacerCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerCollectionReusableView.swift; sourceTree = "<group>"; };
 		2DD078732630C2A5003376E6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			children = (
 				2D9BE9232637B12100D88DD0 /* ToDoViewController.swift */,
 				2D9BE92B263905B600D88DD0 /* ToDoReusableCollectionViewCell.swift */,
+				2DCF322B263F0E88002B8DDB /* NewToDoViewController.swift */,
 			);
 			path = "To-Do Page";
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				2D80FD1C262B994800CE0BBE /* RegistrationViewController.swift in Sources */,
 				2DEC8C7C2614DC6800E2A935 /* SceneDelegate.swift in Sources */,
 				2DF15F43262D1BD900EEE43B /* ClassesCollectionViewCell.swift in Sources */,
+				2DCF322C263F0E88002B8DDB /* NewToDoViewController.swift in Sources */,
 				2D80FD7C262BCC3000CE0BBE /* DBController.swift in Sources */,
 				2DF15F3F262D1B6400EEE43B /* ToDoCollectionViewCell.swift in Sources */,
 				2DD0786E2630A3DB003376E6 /* TodayInfoHeaderCollectionReusableView.swift in Sources */,

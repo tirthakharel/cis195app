@@ -105,6 +105,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             let toDoCell = collectionView.dequeueReusableCell(withReuseIdentifier: ToDoCollectionViewCell.identifier, for: indexPath) as! ToDoCollectionViewCell
             if let userEmail = self.currUser?.email {
+                
                 DBController.sharedDB.getUser(with: userEmail) { (user) in
                     if let usr = user {
                         DBController.sharedDB.getToDoCount(with: usr) { (num) in
@@ -114,7 +115,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                                 }
                             }
                         }
+                    } else {
+                        print("what")
                     }
+                    
                 }
             }
             return toDoCell
