@@ -16,10 +16,14 @@
 		2D9BE9242637B12100D88DD0 /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BE9232637B12100D88DD0 /* ToDoViewController.swift */; };
 		2D9BE92826387EEB00D88DD0 /* ClassesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BE92726387EEB00D88DD0 /* ClassesViewController.swift */; };
 		2D9BE92C263905B600D88DD0 /* ToDoReusableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BE92B263905B600D88DD0 /* ToDoReusableCollectionViewCell.swift */; };
+		2DCD8DAB263F5A7000442C9F /* ClassCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD8DAA263F5A7000442C9F /* ClassCollectionViewCell.swift */; };
+		2DCD8DAD263F8A3700442C9F /* ClassPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD8DAC263F8A3700442C9F /* ClassPageViewController.swift */; };
+		2DCD8DAF263FA11300442C9F /* AssignmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD8DAE263FA11300442C9F /* AssignmentTableViewCell.swift */; };
+		2DCD8DB126408AEB00442C9F /* NewClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD8DB026408AEB00442C9F /* NewClassViewController.swift */; };
+		2DCD8DB32640996E00442C9F /* NewAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCD8DB22640996E00442C9F /* NewAssignmentViewController.swift */; };
 		2DCF322C263F0E88002B8DDB /* NewToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCF322B263F0E88002B8DDB /* NewToDoViewController.swift */; };
 		2DD0786E2630A3DB003376E6 /* TodayInfoHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD0786D2630A3DB003376E6 /* TodayInfoHeaderCollectionReusableView.swift */; };
 		2DD078712630B824003376E6 /* SpacerCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD078702630B824003376E6 /* SpacerCollectionReusableView.swift */; };
-		2DD078742630C2A5003376E6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD078732630C2A5003376E6 /* Location.swift */; };
 		2DD078772630C4F4003376E6 /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD078762630C4F4003376E6 /* LocationController.swift */; };
 		2DD0791826338C00003376E6 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD0791726338C00003376E6 /* Secrets.swift */; };
 		2DEC8C7A2614DC6800E2A935 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DEC8C792614DC6800E2A935 /* AppDelegate.swift */; };
@@ -43,10 +47,14 @@
 		2D9BE9232637B12100D88DD0 /* ToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewController.swift; sourceTree = "<group>"; };
 		2D9BE92726387EEB00D88DD0 /* ClassesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesViewController.swift; sourceTree = "<group>"; };
 		2D9BE92B263905B600D88DD0 /* ToDoReusableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoReusableCollectionViewCell.swift; sourceTree = "<group>"; };
+		2DCD8DAA263F5A7000442C9F /* ClassCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassCollectionViewCell.swift; sourceTree = "<group>"; };
+		2DCD8DAC263F8A3700442C9F /* ClassPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassPageViewController.swift; sourceTree = "<group>"; };
+		2DCD8DAE263FA11300442C9F /* AssignmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentTableViewCell.swift; sourceTree = "<group>"; };
+		2DCD8DB026408AEB00442C9F /* NewClassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewClassViewController.swift; sourceTree = "<group>"; };
+		2DCD8DB22640996E00442C9F /* NewAssignmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAssignmentViewController.swift; sourceTree = "<group>"; };
 		2DCF322B263F0E88002B8DDB /* NewToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewToDoViewController.swift; sourceTree = "<group>"; };
 		2DD0786D2630A3DB003376E6 /* TodayInfoHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayInfoHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		2DD078702630B824003376E6 /* SpacerCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerCollectionReusableView.swift; sourceTree = "<group>"; };
-		2DD078732630C2A5003376E6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		2DD078762630C4F4003376E6 /* LocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
 		2DD0791726338C00003376E6 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		2DEC8C762614DC6800E2A935 /* cis195app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cis195app.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,7 +125,6 @@
 			isa = PBXGroup;
 			children = (
 				2D80FD7E262BCD4B00CE0BBE /* User.swift */,
-				2DD078732630C2A5003376E6 /* Location.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -157,6 +164,11 @@
 			isa = PBXGroup;
 			children = (
 				2D9BE92726387EEB00D88DD0 /* ClassesViewController.swift */,
+				2DCD8DAA263F5A7000442C9F /* ClassCollectionViewCell.swift */,
+				2DCD8DAC263F8A3700442C9F /* ClassPageViewController.swift */,
+				2DCD8DAE263FA11300442C9F /* AssignmentTableViewCell.swift */,
+				2DCD8DB026408AEB00442C9F /* NewClassViewController.swift */,
+				2DCD8DB22640996E00442C9F /* NewAssignmentViewController.swift */,
 			);
 			path = "Classes Page";
 			sourceTree = "<group>";
@@ -330,6 +342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D80FD23262B9AB000CE0BBE /* LoginViewController.swift in Sources */,
+				2DCD8DAB263F5A7000442C9F /* ClassCollectionViewCell.swift in Sources */,
 				2DD0791826338C00003376E6 /* Secrets.swift in Sources */,
 				2D80FD2D262BA26A00CE0BBE /* Extensions.swift in Sources */,
 				2D9BE92826387EEB00D88DD0 /* ClassesViewController.swift in Sources */,
@@ -338,15 +351,18 @@
 				2D80FD7F262BCD4B00CE0BBE /* User.swift in Sources */,
 				2D9BE92C263905B600D88DD0 /* ToDoReusableCollectionViewCell.swift in Sources */,
 				2DD078712630B824003376E6 /* SpacerCollectionReusableView.swift in Sources */,
+				2DCD8DAF263FA11300442C9F /* AssignmentTableViewCell.swift in Sources */,
 				2DD078772630C4F4003376E6 /* LocationController.swift in Sources */,
 				2D9BE9242637B12100D88DD0 /* ToDoViewController.swift in Sources */,
-				2DD078742630C2A5003376E6 /* Location.swift in Sources */,
 				2D80FD1C262B994800CE0BBE /* RegistrationViewController.swift in Sources */,
 				2DEC8C7C2614DC6800E2A935 /* SceneDelegate.swift in Sources */,
 				2DF15F43262D1BD900EEE43B /* ClassesCollectionViewCell.swift in Sources */,
 				2DCF322C263F0E88002B8DDB /* NewToDoViewController.swift in Sources */,
 				2D80FD7C262BCC3000CE0BBE /* DBController.swift in Sources */,
+				2DCD8DB32640996E00442C9F /* NewAssignmentViewController.swift in Sources */,
+				2DCD8DB126408AEB00442C9F /* NewClassViewController.swift in Sources */,
 				2DF15F3F262D1B6400EEE43B /* ToDoCollectionViewCell.swift in Sources */,
+				2DCD8DAD263F8A3700442C9F /* ClassPageViewController.swift in Sources */,
 				2DD0786E2630A3DB003376E6 /* TodayInfoHeaderCollectionReusableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

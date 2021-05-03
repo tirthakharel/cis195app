@@ -115,10 +115,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                                 }
                             }
                         }
-                    } else {
-                        print("what")
                     }
-                    
                 }
             }
             return toDoCell
@@ -203,8 +200,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if (indexPath.item == 0) {
             // present classes
             let vc = ClassesViewController()
+            vc.currUser = currUser
             let navView = UINavigationController(rootViewController: vc)
             navView.modalPresentationStyle = .fullScreen
+            navView.navigationBar.prefersLargeTitles = true
             DispatchQueue.main.async {
                 self.present(navView, animated: true)
             }

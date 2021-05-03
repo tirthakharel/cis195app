@@ -21,7 +21,7 @@ class RegistrationViewController: UIViewController {
         firstNameField.autocapitalizationType = .none
         firstNameField.autocorrectionType = .no
         firstNameField.returnKeyType = .continue
-        // TODO: put some constraints and UI stuff
+        firstNameField.borderStyle = .roundedRect
         firstNameField.placeholder = "First Name"
         return firstNameField
     }()
@@ -31,7 +31,7 @@ class RegistrationViewController: UIViewController {
         lastNameField.autocapitalizationType = .none
         lastNameField.autocorrectionType = .no
         lastNameField.returnKeyType = .continue
-        // TODO: put some constraints and UI stuff
+        lastNameField.borderStyle = .roundedRect
         lastNameField.placeholder = "Last Name"
         return lastNameField
     }()
@@ -42,7 +42,7 @@ class RegistrationViewController: UIViewController {
         emailField.autocapitalizationType = .none
         emailField.autocorrectionType = .no
         emailField.returnKeyType = .continue
-        // TODO: put some constraints and UI stuff
+        emailField.borderStyle = .roundedRect
         emailField.placeholder = "example@email.com"
         return emailField
     }()
@@ -52,7 +52,7 @@ class RegistrationViewController: UIViewController {
         pwField.autocapitalizationType = .none
         pwField.autocorrectionType = .no
         pwField.returnKeyType = .done
-        // TODO: put some constraints and UI stuff
+        pwField.borderStyle = .roundedRect
         pwField.placeholder = "Password"
         pwField.isSecureTextEntry = true
         return pwField

@@ -1,15 +1,14 @@
 //
-//  NewToDoViewController.swift
+//  NewClassViewController.swift
 //  cis195app
 //
 
 import UIKit
 import FirebaseAuth
 
-class NewToDoViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
-    
-    let pickerData = ["(!) Low Priority", "(!!) Medium Priority", "(!!!) High Priority"]
-    let selectData = ["1", "2", "3"]
+class NewClassViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+    let pickerData = ["White", "Blue", "Red", "Light Gray", "Green", "Yellow"]
+    var pickedIdx = 0
     var currUser: FirebaseAuth.User?
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -17,7 +16,7 @@ class NewToDoViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 3
+        return pickerData.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -25,10 +24,10 @@ class NewToDoViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.pickerTextField.text = selectData[row]
-        priorityField.resignFirstResponder()
+        self.colorTextField.text = pickerData[row]
+        self.pickedIdx = row
+        colorPicker.resignFirstResponder()
     }
-    
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -36,52 +35,51 @@ class NewToDoViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         return scrollView
     }()
     
-    private let taskField: UITextField = {
+    private let nameField: UITextField = {
         let emailField = UITextField()
         emailField.autocapitalizationType = .none
         emailField.autocorrectionType = .no
         emailField.returnKeyType = .continue
-        emailField.placeholder = "Task Name"
+        emailField.placeholder = "Class Name"
         emailField.borderStyle = .roundedRect
         return emailField
     }()
     
-    private let priorityField: UIPickerView = {
+    private let colorPicker: UIPickerView = {
         let priorityField = UIPickerView()
         return priorityField
     }()
     
-    private let pickerTextField : UITextField = {
+    private let colorTextField : UITextField = {
         let pickerField = UITextField()
-        pickerField.placeholder = "Priority"
+        pickerField.placeholder = "Color"
         pickerField.borderStyle = .roundedRect
         return pickerField
     }()
     
     private let submitButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle("Submit", for:.normal)
-        btn.backgroundColor = .link
+        btn.setTitle("Add Class", for:.normal)
+        btn.backgroundColor = .systemGreen
         btn.titleLabel?.font = .systemFont(ofSize: 20, weight: .semibold)
         return btn
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "New To-Do"
+        title = "New Class"
         view.backgroundColor = .white
         
         submitButton.addTarget(self, action: #selector(didTapSubmitButton), for: .touchUpInside)
-        taskField.delegate = self
-        priorityField.delegate = self
-        priorityField.dataSource = self
-        pickerTextField.text = selectData[0]
-        pickerTextField.inputView = priorityField
+        nameField.delegate = self
+        colorPicker.delegate = self
+        colorPicker.dataSource = self
+        colorTextField.inputView = colorPicker
         
         
         view.addSubview(scrollView)
-        scrollView.addSubview(taskField)
-        scrollView.addSubview(pickerTextField)
+        scrollView.addSubview(nameField)
+        scrollView.addSubview(colorTextField)
         scrollView.addSubview(submitButton)
     }
     
@@ -89,18 +87,18 @@ class NewToDoViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         super.viewDidLayoutSubviews()
         scrollView.frame = view.bounds
         
-        taskField.frame = CGRect(x: 30,
+        nameField.frame = CGRect(x: 30,
                                  y: 20,
                                  width: scrollView.width - 60,
                                  height: 52)
         
-        pickerTextField.frame = CGRect(x: 30,
-                                       y: taskField.bottom + 10,
+        colorTextField.frame = CGRect(x: 30,
+                                       y: nameField.bottom + 10,
                                        width: scrollView.width - 60,
                                        height: 52)
         
         submitButton.frame = CGRect(x: 30,
-                                    y: pickerTextField.bottom + 10,
+                                    y: colorTextField.bottom + 10,
                                     width: scrollView.width - 60,
                                     height: 52)
     }
@@ -108,24 +106,24 @@ class NewToDoViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     // MARK: - Actions
     
     @objc private func didTapSubmitButton() {
-        taskField.resignFirstResponder()
-        pickerTextField.resignFirstResponder()
-        guard let task = taskField.text, let priorityStr = pickerTextField.text,
-              !task.isEmpty, let priority = Int(priorityStr) else {
-                alertSubmitError()
+        nameField.resignFirstResponder()
+        colorTextField.resignFirstResponder()
+        guard let className = nameField.text, let colorStr = colorTextField.text,
+              !className.isEmpty, !colorStr.isEmpty else {
+            alertSubmitError(with: "Please provide all fields")
                 return
               }
 
         if let userEmail = self.currUser?.email {
             DBController.sharedDB.getUser(with: userEmail) { (user) in
                 if let usr = user {
-                    DBController.sharedDB.addToDo(with: usr, with: ToDo(taskName: task, priority: priority, dueDate: nil)) { succ in
+                    DBController.sharedDB.addClass(with: usr, with: UserClass(className: className, bgValue: self.pickedIdx, assignments: [])) { (succ, err) in
                         if (succ) {
                             DispatchQueue.main.async {
                                 self.navigationController?.popViewController(animated: true)
                             }
                         } else {
-                            self.alertSubmitError()
+                            self.alertSubmitError(with: err!)
                         }
                     }
                 }
@@ -135,22 +133,24 @@ class NewToDoViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     // MARK: - Functions
     
-    func alertSubmitError() {
-        let alert = UIAlertController(title: "Error", message: "Please provide all fields", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-        present(alert, animated: true)
+    func alertSubmitError(with err : String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Error", message: err, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        }
     }
     
 }
 
 // MARK: - Delegate Functions
-extension NewToDoViewController: UITextFieldDelegate {
+extension NewClassViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if textField == taskField {
-            pickerTextField.becomeFirstResponder()
-        } else if textField == pickerTextField {
+        if textField == nameField {
+            colorTextField.becomeFirstResponder()
+        } else if textField == colorTextField {
             didTapSubmitButton()
         }
         
@@ -158,11 +158,10 @@ extension NewToDoViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == pickerTextField {
-            priorityField.isHidden = false
+        if textField == colorTextField {
+            colorPicker.isHidden = false
             return false
         }
         return true
     }
 }
-

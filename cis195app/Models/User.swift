@@ -2,7 +2,7 @@
 //  User.swift
 //  cis195app
 //
-//  Created by Tirtha Kharel on 4/17/21.
+//  Contains User, ToDo, Assignment and Class model
 //
 
 import Foundation
@@ -48,6 +48,68 @@ struct ToDo {
             return .systemRed
         default:
             return .black
+        }
+    }
+}
+
+struct Assignment {
+    var name: String
+    var priority: Int
+    var dueDate: String?
+    
+    var priorityString: String {
+        switch priority {
+        case 1:
+            return "Low Priority"
+        case 2:
+            return "Medium Priority"
+        case 3:
+            return "High Priority"
+        default:
+            return "Low Priority"
+        }
+    }
+    
+    var priorityColor: UIColor {
+        switch priority {
+        case 1:
+            return .black
+        case 2:
+            return .systemBlue
+        case 3:
+            return .systemRed
+        default:
+            return .black
+        }
+    }
+    
+    var dateString: String {
+        if let date = dueDate {
+            return date
+        }
+        return "No due date specified"
+    }
+}
+
+struct UserClass {
+    var className: String
+    var bgValue: Int
+    var assignments: [Assignment]
+    
+    var bgColor: UIColor {
+        switch bgValue {
+        case 1:
+            return .blue
+        case 2:
+            return .red
+        case 3:
+            return .lightGray
+        case 4:
+            return .green
+        case 5:
+            return .yellow
+        default:
+            return .white
         }
     }
 }

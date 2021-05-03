@@ -19,8 +19,8 @@ class LoginViewController: UIViewController {
         emailField.autocapitalizationType = .none
         emailField.autocorrectionType = .no
         emailField.returnKeyType = .continue
-        // TODO: put some constraints and UI stuff
         emailField.placeholder = "Email Address"
+        emailField.borderStyle = .roundedRect
         return emailField
     }()
     
@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
         pwField.autocapitalizationType = .none
         pwField.autocorrectionType = .no
         pwField.returnKeyType = .done
-        // TODO: put some constraints and UI stuff
+        pwField.borderStyle = .roundedRect
         pwField.placeholder = "Password"
         pwField.isSecureTextEntry = true
         return pwField
